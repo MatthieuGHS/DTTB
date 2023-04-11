@@ -1,0 +1,57 @@
+/*
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Staatliches', sans-serif;
+
+*/
+*{
+  margin: 0;
+  padding: 0;
+  transition-duration: 0.8s;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+p{
+  padding: 10px;
+}
+h1{
+  text-align: center;
+  margin: 5px;
+}
+.main{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  background: lightpink;
+}
+.topInfo{
+  opacity: 0.4;
+}
+.info{
+  font-family: 'Staatliches', sans-serif;
+}
+.box{
+  height: 90vh;
+  width: 90vw;
+  margin-top: 25vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn{
+  position: fixed;
+  border-radius: 50%;
+  text-shadow: 1px 1px white;
+  vertical-align: baseline;
+  z-index: 2;
+  cursor: pointer;
+  padding: 15px;
+}
+.btn2{
+  display: none;
+}
+.back{
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
+}

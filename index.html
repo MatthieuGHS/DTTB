@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Don't Touch The Background !</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" type="image/png" href="icon.png"/>
+  </head>
+  <body>
+    <div id="main" class="main">
+      <div id="back" class="back"></div>
+      <p class="topInfo" id="topInfo"><span class="info">Points : </span><span id="pts">0</span><br><span class="timeT"><span class="info">Time : </span><span id="time">0</span> s/10s</span></p>
+      <div class="box">
+        <h1 id="texte" class="text">Click The Button</h1>
+        <p id="texte2" class="text">and don't touch the background</p>
+        <button id="btn1" class="btn" style="top:60vh;">Click</button>
+        <button onclick="refresh()" id="btn2" class="btn btn2" style="top:60vh;">Restart</button>
+      </div>
+    </div>
+  </body>
+  <script type="text/javascript">
+    var btn = document.getElementById('btn1');
+    btn.addEventListener('click', change);
+    document.getElementById('back').addEventListener('click', lose);
+
+    var pts = 0,
+        b = true,
+        t = 0;
+
+
+    var highScore = localStorage.getItem('highScore') || 0;
+    function high() {
+      if (pts > highScore) {
+        highScore = parseInt(pts);
+        localStorage.setItem('highScore', highScore);
+      }
+      return highScore;
+    }
+    function timer() {
+      if (t < 10) {
+        t++;
+        document.getElementById('time').innerHTML = t;
+      }else if (t >= 10) {
+        lose();
+      }
+    }
+    function lose() {
+      t = 10;
+      btn.style.display = 'none';
+      document.getElementById('texte').style.opacity = '1';
+      document.getElementById('texte2').style.opacity = '0.6';
+      //document.getElementById('texte2').style.display = 'none';
+      document.getElementById('texte2').innerHTML = 'High Score : '+highScore+' !';
+      document.getElementById('texte').innerHTML = 'You\'ve got '+pts+' points';
+      document.getElementById('btn2').style.display = 'block';
+    }
+    function refresh() {
+      window.location.href = "index.html";
+    }
+    function change() {
+      if (b == true) {
+        setInterval(timer, 1000);
+        document.getElementById('texte').style.opacity = '0.4';
+        document.getElementById('texte2').style.opacity = '0.4';
+        document.getElementById('topInfo').style.opacity = '1';
+        document.getElementById('topInfo').style.fontSize = '20px';
+        b = false;
+      }
+      var x = Math.random() * 100,
+          y = Math.random() * 100,
+          z = (Math.random() * 20) + 10;
+      if (x > 70) {
+        btn.style.top = (x-30)+'vh';
+      }else if (y > 70) {
+        btn.style.left = (y-30)+'vw';
+      }else {
+        btn.style.top = x+'vh';
+        btn.style.left = y+'vw';
+      }
+      btn.style.fontSize = z+'px';
+      btn.style.background = 'rgba('+z+','+x+','+y+')';
+      btn.style.color = 'rgba('+y+','+x+','+z+')';
+      btn.style.padding = z;
+      btn.style.transitionDuration = x / 60;
+      pts++;
+      document.getElementById('pts').innerHTML = pts;
+      high();
+    }
+  </script>
+</html>
